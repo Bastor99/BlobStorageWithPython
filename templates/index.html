@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azure Blob Storage</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <div class="logo-icon">
+                    ☁
+                </div>
+                <h1>
+                    Azure <span>Blob Storage</span>
+                </h1>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="title">
+                <h2>Gerenciador de Imagens</h2>
+                <p>
+                    Faça upload, visualize e baixe arquivos armazenados
+                    no Azure Blob Storage.
+                </p>
+            </section>
+
+            <!-- Upload -->
+            <section class="upload-card">
+                <form action="/upload" method="POST" enctype="multipart/form-data">
+                    <div class="upload-area">
+                        <div class="upload-icon">
+                            📤
+                        </div>
+                        <h3>
+                            Envie uma imagem
+                        </h3>
+                        <p>
+                            Selecione uma imagem do seu computador
+                        </p>
+                        <label for="arquivo" class="file-label">
+                            Escolher imagem
+                        </label>
+                        <input type="file" id="arquivo" name="arquivo" class="file-input" accept="image/*" required>
+                        <button type="submit" class="upload-button">
+                            Fazer Upload
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Arquivos -->
+            <section class="files-card">
+                <div class="files-header">
+                    <h2>
+                        Imagens armazenadas
+                    </h2>
+                    <span class="file-count">
+                        {{ arquivos|length }} arquivos
+                    </span>
+                </div>
+
+                {% if arquivos %}
+                <ul class="file-list">
+                    {% for arquivo in arquivos %}
+                    <li class="file-item">
+                        <div class="file-info">
+                            <div class="file-icon">
+                                🖼️
+                            </div>
+                            <span class="file-name">
+                                {{ arquivo }}
+                            </span>
+                        </div>
+                        <a href="/download/{{ arquivo }}" class="download-button">
+                            Download
+                        </a>
+                    </li>
+
+                    {% endfor %}
+                </ul>
+
+                {% else %}
+                <div class="empty-state">
+                    <div class="empty-state-icon">
+                        📂
+                    </div>
+                    <p>
+                        Nenhuma imagem armazenada.
+                    </p>
+                </div>
+
+                {% endif %}
+            </section>
+        </div>
+    </main>
+
+
+    <footer>
+        Azure Blob Storage • Projeto acadêmico
+    </footer>
+
+</body>
+</html>
