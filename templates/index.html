@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Azure Blob Storage</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
     <header>
         <div class="container header-content">
@@ -21,7 +23,72 @@
     </header>
 
     <main>
-        <div class="container">
+        <div class="container"> 
+            <!-- Consultas de acesso -->
+
+            <section class="access-options">
+
+                <div class="access-title">
+                    <h2>Consultas de Acesso</h2>
+
+                    <p>
+                        Consulte o histórico de acessos armazenado no Azure Table Storage.
+                    </p>
+                </div>
+
+                <div class="access-grid">
+
+                    <!-- Consulta por usuário -->
+
+                    <div class="access-option">
+
+                        <div class="access-icon">
+                            🔎
+                        </div>
+
+                        <h3>Acessos de um usuário</h3>
+
+                        <p>
+                            Consulte onde um usuário esteve nos últimos 30 dias.
+                        </p>
+
+                        <form action="/acessos/" method="GET" onsubmit="this.action += this.usuario.value;">
+
+                            <input type="text" name="usuario" placeholder="Ex: User123" required>
+
+                            <button type="submit">
+                                Consultar usuário
+                            </button>
+
+                        </form>
+
+                    </div>
+
+
+                    <!-- Consulta por data -->
+
+                    <div class="access-option">
+
+                        <div class="access-icon">
+                            📅
+                        </div>
+
+                        <h3>Quem entrou hoje?</h3>
+
+                        <p>
+                            Consulte todos os acessos registrados na data atual.
+                        </p>
+
+                        <a href="/acessos-hoje" class="access-button">
+                            Ver acessos de hoje
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </section>
+
             <section class="title">
                 <h2>Gerenciador de Imagens</h2>
                 <p>
@@ -106,4 +173,5 @@
     </footer>
 
 </body>
+
 </html>
